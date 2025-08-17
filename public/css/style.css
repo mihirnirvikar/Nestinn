@@ -1,0 +1,265 @@
+body {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.errorContainer {
+  margin-bottom: 35%;
+}
+
+.boilerContainer {
+  flex: 1;
+}
+
+.navbar {
+  height: 6rem;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.163);
+  color: #000;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  margin-left: 32px;
+  margin-right: 48px;
+}
+
+.nav-link {
+  margin-right: 32px;
+  color: #000;
+  font-size: 18px;
+}
+
+.footer {
+  height: 200px;
+  width: 100%;
+  background-color: #b6b4b437;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.companyPrivacy {
+  font-size: 15px;
+  margin-top: 32px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.companyPrivacy .privacy {
+  display: flex;
+  flex-direction: column;
+}
+
+.companyPrivacy .about {
+  display: flex;
+  flex-direction: column;
+}
+
+.companyPrivacy a {
+  font-size: 15px;
+  color: #000;
+  text-decoration: none;
+}
+
+.socialLinks {
+  font-size: 28px;
+  color: #2c2929;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+
+.socialLinks i {
+  margin-right: 12px;
+}
+
+.socialLinks i:hover {
+  color: #000;
+  transform: scale(1.5);
+  transition: 0.5s ease-in-out;
+}
+
+.listingContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 0px 80px;
+}
+
+.listingContainer a {
+  text-decoration: none;
+  color: black;
+}
+
+.listings {
+  width: 180px;
+  height: 280px;
+  margin-bottom: 30px;
+  margin: 5px;
+}
+
+.listingsDetails {
+  margin-top: 4px;
+  padding: 0px 8px;
+}
+
+.listingImage {
+  width: 100%;
+  height: 180px;
+  border-radius: 24px;
+  object-fit: cover;
+}
+
+.listingImage:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  transition: 0.2s ease-in-out;
+}
+
+.listingTitle {
+  font-size: 14px;
+}
+
+.formContainer {
+  width: 100%;
+  max-height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  padding: 0 20px; /* Extra padding for smaller screens */
+}
+
+.formContainer form {
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #b6b4b437;
+  width: 100%;
+  max-width: 600px; /* max-width for desktop, auto adjust for smaller */
+  margin-top: 20px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.newListingFormBtnDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newListingFormBtn {
+  width: 100%;
+  max-width: 150px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  background-color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.newListingFormBtn:hover {
+  background-color: #333;
+}
+
+/* Show Route */
+
+.showContainer {
+  width: 100%;
+  max-width: 800px;
+  min-height: 1000px;
+  margin: 20px auto;
+  font-family: "Segoe UI", sans-serif;
+  padding: 10px;
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.showHeading {
+  font-size: 28px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 16px;
+}
+
+.showImage {
+  width: 100%;
+  height: 500px;
+  border-radius: 16px;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+.showDetail{
+    padding: 10px;
+}
+
+.showTitle {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.showDescription, .showPrice, .showLocation, .showCountry {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.showContainer a {
+  text-decoration: none;
+}
+
+.editBtn {
+  
+  background-color: #f43f5e;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.editBtn:hover {
+  color: #000;
+  transition: 0.3s ease-in-out;
+}
+
+.deleteBtn {
+  background-color: #000;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  background-color: #333;
+  transition: 0.3s ease-in-out;
+}
+
+.showEditDeleteBtn{
+  display: flex;
+  gap: 20px;
+}

@@ -1,0 +1,83 @@
+<%- layout('layouts/boilerplate'); %>
+
+    <body>
+        <div class="formContainer">
+            <h3>Edit Route</h3>
+            <form action="http://localhost:8080/listings/<%=listing._id%>?_method=PUT" method="POST"
+                class="row-100 needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="validationCustom01" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="validationCustom01" name="title"
+                        placeholder="Enter Title" value="<%=listing.title%>" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please provide a valid title.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="validationCustom02" class="form-label">Description</label>
+                    <textarea type="text" class="form-control" id="validationCustom02" name="description"
+                        placeholder="Enter Description" required><%= listing.description %></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please provide a valid description.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="validationCustom03" class="form-label">Image</label>
+                    <input type="text" class="form-control" id="validationCustom03" name="image"
+                        placeholder="Enter Image URL" value="<%=listing.image%>">
+                </div>
+
+                <div class="row  g-2">
+                    <div class="mb-3 col-md-5">
+                        <label for="validationCustom04" class="form-label">Price</label>
+                        <input type="Number" class="form-control" id="validationCustom04" placeholder="Enter Price"
+                            name="price" value="<%=listing.price%>" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a valid price.
+                        </div>
+                    </div>
+
+                    <div class="mb-4 col-md-7">
+                        <label for="validationCustom05" class="form-label">Country</label>
+                        <input type="text" class="form-control" id="validationCustom05" name="country"
+                            placeholder="Enter Country Name" value="<%=listing.country%>" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a valid country name.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <label for="validationCustom06" class="form-label">Location</label>
+                    <input type="text" class="form-control" id="validationCustom06" placeholder="Enter Location"
+                        name="location" value="<%=listing.location%>" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please provide a valid location name.
+                    </div>
+                </div>
+
+
+                <div class="newListingFormBtnDiv mb-3">
+                    <button class="newListingFormBtn btn btn-dark" type="submit">Edit Listing</button>
+                </div>
+
+            </form>
+        </div>
+    </body>
