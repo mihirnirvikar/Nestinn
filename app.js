@@ -8,7 +8,7 @@ const path = require("path");
 const Listing = require("./models/listing.js");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
-const { listingSchema } = require("./Schema.js");
+const { listingJoiSchema, reviewJoiSchema } = require("./Schema.js");
 const Review = require("./models/review.js");
 
 
@@ -32,6 +32,31 @@ main()
   .catch((err) => {
     console.log(err);
   });
+
+
+ const validateListing = (req, res, next) => {
+  const { error } = listingJoiSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    console.log(msg);
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+ } 
+
+ const validateReview = (req, res, next) => {
+  console.log(req.body);
+  const { error } = reviewJoiSchema.validate(req.body, {convert : true});
+  if(error){
+    const msg = error.details.map((el) => el.message).join(",");
+    console.log(msg);
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+ }
+
 
 app.get("/", (req, res) => {
   res.send("Hello from NestInn");
@@ -86,14 +111,7 @@ app.get(
 );
 
 // Create post route to store new listing data to DB   UPDATE ROUTE
-app.post(
-  "/listings",
-  wrapAsync(async (req, res, next) => {
-    let result = listingSchema.validate(req.body);
-    console.log(result);
-    if(result.error){
-      return next(new ExpressError(400, result.error.message));
-    }
+app.post("/listings", validateListing, wrapAsync(async (req, res, next) => {
     const newListing = new Listing(req.body.listing);
     await newListing.save();
     res.redirect(`/listings/${newListing._id}`);
@@ -147,7 +165,7 @@ app.delete(
 );
 
 // Review Route 
-app.post('/listings/:id/reviews', wrapAsync(async (req, res, next) => {
+app.post('/listings/:id/reviews', validateReview,  wrapAsync(async (req, res, next) => {
   const id = req.params.id;
   const listing = await Listing.findById(id);
   const review = new Review(req.body);
@@ -160,8 +178,10 @@ app.post('/listings/:id/reviews', wrapAsync(async (req, res, next) => {
 
 
 
-
-
+// For all other routes
+app.all(/.*/, (req, res, next) => {
+   next(new ExpressError(404, "Page not Found"));
+})
 
 // Error handling middleware
 app.use((err, req, res, next) => {
