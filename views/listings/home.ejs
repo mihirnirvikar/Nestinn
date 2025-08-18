@@ -18,8 +18,11 @@
                                     <%=listing.location%>
                                 </span>
                                 <br>
-                                <span class="listingPrice"> &#x20B9 <%= listing.price.toLocaleString('en-IN') %> for
-                                        2 nights </span>
+                                <span class="listingPrice">
+                                    &#x20B9 <%= Number(listing.price).toLocaleString('en-IN') %> for 2 nights
+                                </span>
+
+
                             </p>
                             </span>
                         </div>

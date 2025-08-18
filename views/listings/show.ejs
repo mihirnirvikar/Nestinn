@@ -68,14 +68,30 @@
                 <p class="h4 fw-light"><b>Reviews</b></p>
 
                 <div class="d-flex flex-wrap ">
-                    <% for(review of listing.reviews) { %> 
-                    <div class="mt-3 p-3  col-6">
-                        <p><%= review.rating %> starts</p>
-                        <p><%= review.comment%></p>
-                    </div>
-                    <% } %>
+                    <% for(let review of listing.reviews) { %>
+                        <div class="card m-3" style="width: 20rem;">
+                            <div class="card-body ">
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="card-User">John Doe</h5>
+                                    <form class="" method="POST" action="/listings/<%= listing._id%>/reviews/<%=review._id%>?_method=DELETE">
+                                        <button type="submit" class="btn btn-dark btn-sm">Delete</button>
+                                    </form>
+
+                                </div>
+
+                                <p class="card-rating">
+                                    <%= review.rating %> starts
+                                </p>
+                                <p class="card-comment">
+                                    <%= review.comment %>
+                                </p>
+                            </div>
+                        </div>
+                        <% } %>
                 </div>
-                
+
+
+
 
             </div>
 
