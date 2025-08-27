@@ -81,9 +81,28 @@ body {
 }
 
 .socialLinks i:hover {
-  color: #000;
-  transform: scale(1.5);
+  transform: scale(1.25);
   transition: 0.5s ease-in-out;
+}
+
+.facebook:hover {
+  color: #3b5998;
+}
+
+.twitter:hover {
+  color: #00acee;
+}
+
+.instagram:hover {
+  color: #C13584;
+}
+
+.linkedin:hover {
+  color: #0e76a8;
+}
+
+.youtube:hover {
+  color: #FF0000;
 }
 
 .listingContainer {
@@ -122,7 +141,9 @@ body {
 .listingImage:hover {
   cursor: pointer;
   opacity: 0.9;
-  transition: 0.2s ease-in-out;
+  transition: 0.3s ease-in-out;
+  transform-origin: center;
+  transform: scale(1.03);
 }
 
 .listingTitle {

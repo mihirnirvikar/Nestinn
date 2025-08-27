@@ -1,38 +1,45 @@
-<%- layout('layouts/boilerplate'); %>
+<%- layout('layouts/boilerplate') %>
 
-    <body>
-        <div class="listingContainer">
-            <% listings.forEach(listing=> { %>
-                <a href="http://localhost:8080/listings/<%=listing._id%>">
-                    <div class="listings">
-                        <div class="listingsImage">
-                            <img class="listingImage" src="<%=listing.image%>" alt="Listing Image">
-                        </div>
-                        <div class="listingsDetails">
-
-                            <p class="listingTitle"><b>
-                                    <%=listing.title%>
-                                </b>
-                                <br>
-                                <span class="listingLocation">
-                                    <%=listing.location%>
-                                </span>
-                                <br>
-                                <span class="listingPrice">
-                                    &#x20B9 <%= Number(listing.price).toLocaleString('en-IN') %> for 2 nights
-                                </span>
-
-
-                            </p>
-                            </span>
-                        </div>
-
-                    </div>
-                </a>
-
-                <% }) %>
+    <% if(success && success.length) { %>
+        <div class="alert alert-danger alert-dismissible fade show mt-3 col-md-6 offset-md-3" role="alert">
+            <%= success %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+        <% } %>
 
-    </body>
+            <body>
+                <div class="listingContainer">
+                    <% listings.forEach(listing=> { %>
+                        <a href="http://localhost:8080/listings/<%=listing._id%>">
+                            <div class="listings">
+                                <div class="listingsImage">
+                                    <img class="listingImage" src="<%=listing.image%>" alt="Listing Image">
+                                </div>
+                                <div class="listingsDetails">
 
-    </html>
+                                    <p class="listingTitle"><b>
+                                            <%=listing.title%>
+                                        </b>
+                                        <br>
+                                        <span class="listingLocation">
+                                            <%=listing.location%>
+                                        </span>
+                                        <br>
+                                        <span class="listingPrice">
+                                            &#x20B9 <%= Number(listing.price).toLocaleString('en-IN') %> for 2 nights
+                                        </span>
+
+
+                                    </p>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </a>
+
+                        <% }) %>
+                </div>
+
+            </body>
+
+            </html>

@@ -51,13 +51,14 @@ router.get(
   })
 );
 
-// Create post route to store new listing data to DB   UPDATE ROUTE
+// Create post route to store new listing data to DB   NEW CREATE ROUTE
 router.post(
   "/",
   validateListing,
   wrapAsync(async (req, res, next) => {
     const newListing = new Listing(req.body);
     await newListing.save();
+    req.flash("success", "Successfully made a new listing!");
     res.redirect(`/listings/${newListing._id}`);
   })
 );
@@ -90,7 +91,7 @@ router.put(
     if (!listing) {
       return next(new ExpressError(404, "Listing not found"));
     }
-
+    req.flash("success", "Successfully updated listing!");
     res.redirect(`/listings/${listing._id}`);
   })
 );
@@ -102,6 +103,7 @@ router.delete(
     const id = req.params.id;
     const deleteListing = await Listing.findByIdAndDelete(id);
     // console.log(deleteListing);
+    req.flash("success", "Successfully deleted listing");
     res.redirect("/listings");
   })
 );
