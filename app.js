@@ -1,6 +1,5 @@
 require('events').EventEmitter.defaultMaxListeners = 50;
 
-
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
@@ -15,10 +14,14 @@ const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
 const { listingJoiSchema, reviewJoiSchema } = require("./Schema.js");
 const Review = require("./models/review.js");
-const listings = require("./routes/listing.js");
-const reviews = require("./routes/review.js");
+const listingsRouter = require("./routes/listing.js");
+const reviewsRouter = require("./routes/review.js");
+const userRouter = require("./routes/user.js");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -44,7 +47,22 @@ const sessionOptions = {
 
 app.use(session(sessionOptions));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
+
+
+app.use("/listings", listingsRouter)
+app.use("/listings/:id/reviews", reviewsRouter);
+app.use("/register", userRouter);
 
 
 async function main() {
@@ -61,9 +79,9 @@ main()
 
 
 
-app.get("/", (req, res) => {
-  res.send("Hello from NestInn");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello from NestInn");
+// });
 
 // app.get('/testListing', async(req, res) => {
 //     const sampleListing = new Listing({
@@ -82,15 +100,8 @@ app.get("/", (req, res) => {
 //     })
 // });
 
-app.use((req, res, next) => {
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  next();
-});
 
 
-app.use("/listings", listings)
-app.use("/listings/:id/reviews", reviews);
 
 
 

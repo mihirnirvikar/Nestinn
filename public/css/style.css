@@ -157,9 +157,13 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 50px;
   margin-bottom: 100px;
   padding: 0 20px; /* Extra padding for smaller screens */
+}
+
+.formContainerNewListing && .formContainerEditListing {
+  margin-top: 100px;
 }
 
 .formContainer form {
