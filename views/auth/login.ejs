@@ -1,0 +1,59 @@
+<%- layout('layouts/boilerplate'); %>
+
+<% if(error && error.length) { %>
+        <div class="alert alert-danger alert-dismissible fade show col-6 offset-3 mt-3" role="alert">
+            <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <% } %>
+
+        <% if(success && success.length) { %>
+        <div class="alert alert-success alert-dismissible fade show col-6 offset-3 mt-3" role="alert">
+            <%= success %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <% } %>
+
+    <body>
+        <div class="formContainer">
+            <h3>Welcome to NestInn</h3>
+            <form action="http://localhost:8080/register/login" method="POST" class="row-100 needs-validation" novalidate>
+
+                <div class="mb-3">
+                    <label for="validationCustom02" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="validationCustom02" name="username"
+                        placeholder="Enter username" required></input>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please provide a valid Email.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="validationCustom02" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="validationCustom02" name="password"
+                        placeholder="Enter password" required></input>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please provide a valid Password.
+                    </div>
+                </div>
+
+
+                <div class="newListingFormBtnDiv mb-3">
+                    <button class="newListingFormBtn btn btn-dark" type="submit">Login</button>
+                </div>
+
+                <div>
+                    <p>Don't have an account? <a class="signUpLink text-decoration-none" href="/register">Sign Up</a></p>
+                </div>
+
+            </form>
+        </div>
+    </body>

@@ -5,6 +5,7 @@ const Listing = require("../models/listing.js");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const { listingJoiSchema, reviewJoiSchema } = require("../Schema.js");
+const { isLoggedIn } = require("../middleware.js");
 
 // server side validation on listing data
 const validateListing = (req, res, next) => {
@@ -22,7 +23,7 @@ const validateListing = (req, res, next) => {
 
 // show all listings route  READ ROUTE
 router.get(
-  "/",
+  "/", 
   wrapAsync(async (req, res, next) => {
     const allListings = await Listing.find({});
     res.render("listings/home.ejs", { listings: allListings });
@@ -30,7 +31,7 @@ router.get(
 );
 
 // create new listings route CREATE ROUTE
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("listings/new.ejs");
 });
 
@@ -65,7 +66,7 @@ router.post(
 
 // Create edit route for listing   EDIT ROUTE
 router.get(
-  "/:id/edit",
+  "/:id/edit", isLoggedIn, 
   wrapAsync(async (req, res, next) => {
     const id = req.params.id;
     const listing = await Listing.findById(id);
@@ -98,7 +99,7 @@ router.put(
 
 // Create delete route to delete data from DB   DELETE ROUTE
 router.delete(
-  "/:id",
+  "/:id", isLoggedIn,
   wrapAsync(async (req, res, next) => {
     const id = req.params.id;
     const deleteListing = await Listing.findByIdAndDelete(id);
