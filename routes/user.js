@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const User = require("../models/user");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
+const { isLoggedIn, returnToUrl } = require("../middleware");
 
 // route for signup form
 router.get("/", (req, res) => {
@@ -18,9 +19,12 @@ router.post(
       const { name, username, email, password } = req.body;
       const newUser = new User({ name, username, email });
       const registeredUser = await User.register(newUser, password);
-      console.log(registeredUser);
-      req.flash("success", "Successfully signed up! Please login.");
-      res.redirect("/register/login");
+      // console.log(registeredUser);
+      req.login(registeredUser, (err) => {
+        if (err) return next(err);
+        req.flash("success", "Welcome to NestInn!");
+        return res.redirect("/listings");
+      });
     } catch (error) {
       req.flash("error", error.message);
       res.redirect("/register");
@@ -34,15 +38,10 @@ router.get("/login", (req, res) => {
 });
 
 // route for login logic
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    failureRedirect: "/register/login",
-    failureFlash: true,
-  }),
-  (req, res) => {
+router.post("/login", returnToUrl, passport.authenticate("local", {failureRedirect: "/register/login", failureFlash: true, }),
+  (req, res) => { 
     req.flash("success", "Welcome to NestInn!");
-    res.redirect("/listings");
+    res.redirect(res.locals.returnTo || "/listings");
   }
 );
 

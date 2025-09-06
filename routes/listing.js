@@ -5,7 +5,7 @@ const Listing = require("../models/listing.js");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const { listingJoiSchema, reviewJoiSchema } = require("../Schema.js");
-const { isLoggedIn } = require("../middleware.js");
+const { isLoggedIn, isOwner } = require("../middleware.js");
 
 // server side validation on listing data
 const validateListing = (req, res, next) => {
@@ -23,7 +23,7 @@ const validateListing = (req, res, next) => {
 
 // show all listings route  READ ROUTE
 router.get(
-  "/", 
+  "/",
   wrapAsync(async (req, res, next) => {
     const allListings = await Listing.find({});
     res.render("listings/home.ejs", { listings: allListings });
@@ -43,7 +43,10 @@ router.get(
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return next(new ExpressError(400, "Listing not found"));
     }
-    const listing = await Listing.findById(id).populate("reviews");
+    const listing = await Listing.findById(id)
+      .populate({path : "reviews", 
+        populate: {path: "author"}})
+      .populate("owner");
     if (!listing) {
       return next(new ExpressError(404, "Listing not found"));
     }
@@ -58,6 +61,7 @@ router.post(
   validateListing,
   wrapAsync(async (req, res, next) => {
     const newListing = new Listing(req.body);
+    newListing.owner = req.user._id;
     await newListing.save();
     req.flash("success", "Successfully made a new listing!");
     res.redirect(`/listings/${newListing._id}`);
@@ -66,7 +70,8 @@ router.post(
 
 // Create edit route for listing   EDIT ROUTE
 router.get(
-  "/:id/edit", isLoggedIn, 
+  "/:id/edit",
+  isLoggedIn, isOwner,
   wrapAsync(async (req, res, next) => {
     const id = req.params.id;
     const listing = await Listing.findById(id);
@@ -76,7 +81,7 @@ router.get(
 
 // Create Edited route to store new values to Db   UPDATE EDIT ROUTE
 router.put(
-  "/:id",
+  "/:id", isLoggedIn, isOwner,
   wrapAsync(async (req, res, next) => {
     const { id } = req.params;
 
@@ -89,6 +94,8 @@ router.put(
       runValidators: true,
     });
 
+    console.log(listing);
+
     if (!listing) {
       return next(new ExpressError(404, "Listing not found"));
     }
@@ -99,7 +106,8 @@ router.put(
 
 // Create delete route to delete data from DB   DELETE ROUTE
 router.delete(
-  "/:id", isLoggedIn,
+  "/:id", 
+  isLoggedIn, isOwner,
   wrapAsync(async (req, res, next) => {
     const id = req.params.id;
     const deleteListing = await Listing.findByIdAndDelete(id);

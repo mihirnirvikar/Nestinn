@@ -12,7 +12,9 @@ const userSchema = new Schema({
         required: true,
         unique: true
     }
-})
+}, {
+    timestamps: true
+});
 
 userSchema.plugin(passportLocalMongoose);
 const User = mongoose.model("User", userSchema);

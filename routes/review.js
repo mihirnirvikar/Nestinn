@@ -6,6 +6,7 @@ const Review = require("../models/review.js");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const { listingJoiSchema, reviewJoiSchema } = require("../Schema.js");
+const { isLoggedIn, isReviewOwner } = require("../middleware.js");
 
 // server side validation on review data
 const validateReview = (req, res, next) => {
@@ -20,10 +21,11 @@ const validateReview = (req, res, next) => {
 };
 
 // Review Route 
-router.post('/', validateReview,  wrapAsync(async (req, res, next) => {
+router.post('/', isLoggedIn, validateReview,  wrapAsync(async (req, res, next) => {
   const id = req.params.id;
   const listing = await Listing.findById(id);
   const review = new Review(req.body);
+  review.author = req.user._id;
   await review.save();
   listing.reviews.push(review._id);
   await listing.save();
@@ -32,7 +34,7 @@ router.post('/', validateReview,  wrapAsync(async (req, res, next) => {
 }))
 
 // Delete Reviews Route
-router.delete('/:reviewId', wrapAsync(async(req, res) => {
+router.delete('/:reviewId', isLoggedIn, isReviewOwner,  wrapAsync(async(req, res) => {
   const { id, reviewId } = req.params;
   await Review.findByIdAndDelete(reviewId);
   await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });

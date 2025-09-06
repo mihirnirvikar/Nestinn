@@ -20,13 +20,19 @@ const listingSchema = new Schema({
   price: Number,
   location: String,
   country: String,
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   reviews: [
     {
       type: Schema.Types.ObjectId,
       ref: "Review",
     },
   ],
-});
+  
+}, { timestamps: true });
 
 listingSchema.post("findOneAndDelete", async (listing) => {
   if (listing) {

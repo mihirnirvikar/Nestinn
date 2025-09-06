@@ -14,7 +14,7 @@ body {
 }
 
 .navbar {
-  height: 6rem;
+  height: 5rem;
   width: 100%;
   background-color: #fff;
   box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.163);
@@ -25,17 +25,17 @@ body {
   width: 60px;
   height: 60px;
   margin-left: 32px;
-  margin-right: 48px;
+  margin-right: 32px;
 }
 
 .nav-link {
-  margin-right: 32px;
+  margin-right: 16px;
   color: #000;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .footer {
-  height: 200px;
+  height: 100%;
   width: 100%;
   background-color: #b6b4b437;
   display: flex;
@@ -109,8 +109,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 60px;
-  margin-bottom: 60px;
+  margin-top: 40px;
+  margin-bottom: 40px;
   padding: 0px 80px;
 }
 
@@ -122,8 +122,8 @@ body {
 .listings {
   width: 180px;
   height: 280px;
-  margin-bottom: 30px;
   margin: 5px;
+  margin-bottom: 20px;
 }
 
 .listingsDetails {
@@ -143,7 +143,7 @@ body {
   opacity: 0.9;
   transition: 0.3s ease-in-out;
   transform-origin: center;
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 .listingTitle {

@@ -6,7 +6,15 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
-        <% } %>
+    <% } %>
+
+    <% if(error && error.length) { %>
+        <div class="alert alert-danger alert-dismissible fade show col-6 offset-3 mt-3" role="alert">
+            <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    <% } %>
 
             <body>
                 <div class="showContainer">
@@ -36,17 +44,22 @@
                     <br>
                     <br>
 
-                    <div class="showEditDeleteBtn">
-                        <a class="editBtn" href="http://localhost:8080/listings/<%= listing._id %>/edit">Edit this
-                            Listing</a>
-                        <br><br>
-                        <form method="POST" action="http://localhost:8080/listings/<%= listing._id %>?_method=DELETE">
-                            <button class="deleteBtn" type="submit">Delete this Listing</button>
-                        </form>
-                    </div>
+                    <%if(currUser && currUser._id.equals(listing.owner._id)) {%>
+                        <div class="showEditDeleteBtn">
+                            <a class="editBtn" href="http://localhost:8080/listings/<%= listing._id %>/edit">Edit this
+                                Listing</a>
+                            <br><br>
+                            <form method="POST" action="http://localhost:8080/listings/<%= listing._id %>?_method=DELETE">
+                                <button class="deleteBtn" type="submit">Delete this Listing</button>
+                            </form>
+                        </div>
+                    <% } %>
 
+
+
+                    <% if(currUser) { %>
                     <hr>
-
+                    
                     <div class="showReviews mt-3 ms-3">
                         <p class="h4 fw-light"><b>Share Your Experience</b></p>
 
@@ -72,7 +85,10 @@
                             <button class=" btn btn-dark px-4 py-1 mt-3 mb-3" type="submit">Submit</button>
                         </form>
                     </div>
+                    <% } %>
+
                     <hr>
+
 
                     <div class="ms-3">
                         <p class="h4 fw-light"><b>Reviews</b></p>
@@ -82,12 +98,13 @@
                                 <div class="card m-3" style="width: 20rem;">
                                     <div class="card-body ">
                                         <div class="d-flex justify-content-between">
-                                            <h5 class="card-User">John Doe</h5>
-                                            <form class="" method="POST"
-                                                action="/listings/<%= listing._id%>/reviews/<%=review._id%>?_method=DELETE">
-                                                <button type="submit" class="btn btn-dark btn-sm">Delete</button>
-                                            </form>
-
+                                            <h5 class="card-User"><%= review.author.username %></h5>
+                                            <% if(currUser && currUser._id.equals(review.author._id)) {%>
+                                                <form class="" method="POST"
+                                                    action="/listings/<%= listing._id%>/reviews/<%=review._id%>?_method=DELETE">
+                                                    <button type="submit" class="btn btn-dark btn-sm">Delete</button>
+                                                </form>
+                                            <% } %>
                                         </div>
 
                                         <p class="card-rating">
@@ -100,9 +117,6 @@
                                 </div>
                                 <% } %>
                         </div>
-
-
-
 
                     </div>
 

@@ -2,7 +2,8 @@
 ">
   <div class="container-fluid ">
     <img class="logo" src="/assets/nestInn2.png" alt="">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -10,6 +11,17 @@
         <a class="nav-link " aria-current="page" href="/">Home</a>
         <a class="nav-link " href="/listings">Listings</a>
         <a class="nav-link " href="/listings/new">Add new Listings</a>
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <% if(!currUser) { %>
+          <a class="nav-link " aria-current="page" href="/register">Signup</a>
+          <a class="nav-link " href="/register/login">Login</a>
+        <% } %>
+
+        <% if(currUser) { %>
+              <a class="nav-link " href="/register/logout">Logout</a>
+        <% } %>
       </div>
     </div>
   </div>
