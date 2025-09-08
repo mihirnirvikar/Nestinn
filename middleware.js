@@ -1,5 +1,35 @@
 const Listing = require("./models/listing");
 const Review = require("./models/review")
+const { listingJoiSchema, reviewJoiSchema } = require("./Schema.js");
+const ExpressError = require("./utils/ExpressError");
+
+
+// server side validation on listing data
+const validateListing = (req, res, next) => {
+  const { error } = listingJoiSchema.validate(req.body.listing, {
+    convert: true,
+  });
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    console.log(msg);
+    throw new ExpressError(400, msg);
+  } else {
+    next();
+  }
+};
+
+// server side validation on review data
+const validateReview = (req, res, next) => {
+  const { error } = reviewJoiSchema.validate(req.body, { convert: true });
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    console.log(msg);
+    throw new ExpressError(400, msg);
+  } else {
+    next();
+  }
+};
+
 const isLoggedIn = (req, res, next) => {
     if(!req.isAuthenticated()){
         // store the url they are requesting
@@ -38,4 +68,4 @@ const isReviewOwner = async(req, res, next) => {
 
 }
 
-module.exports = { isLoggedIn, returnToUrl, isOwner, isReviewOwner };
+module.exports = { validateListing, validateReview, isLoggedIn, returnToUrl, isOwner, isReviewOwner };

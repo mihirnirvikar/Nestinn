@@ -5,32 +5,18 @@ const User = require("../models/user");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
 const { isLoggedIn, returnToUrl } = require("../middleware");
+const {
+  showSignupForm,
+  signup,
+  login,
+  logout,
+} = require("../controllers/userController");
 
 // route for signup form
-router.get("/", (req, res) => {
-  res.render("../views/auth/signup.ejs");
-});
+router.get("/", showSignupForm);
 
 // route for signup logic
-router.post(
-  "/",
-  wrapAsync(async (req, res) => {
-    try {
-      const { name, username, email, password } = req.body;
-      const newUser = new User({ name, username, email });
-      const registeredUser = await User.register(newUser, password);
-      // console.log(registeredUser);
-      req.login(registeredUser, (err) => {
-        if (err) return next(err);
-        req.flash("success", "Welcome to NestInn!");
-        return res.redirect("/listings");
-      });
-    } catch (error) {
-      req.flash("error", error.message);
-      res.redirect("/register");
-    }
-  })
-);
+router.post("/", signup);
 
 // login route
 router.get("/login", (req, res) => {
@@ -38,22 +24,17 @@ router.get("/login", (req, res) => {
 });
 
 // route for login logic
-router.post("/login", returnToUrl, passport.authenticate("local", {failureRedirect: "/register/login", failureFlash: true, }),
-  (req, res) => { 
-    req.flash("success", "Welcome to NestInn!");
-    res.redirect(res.locals.returnTo || "/listings");
-  }
+router.post(
+  "/login",
+  returnToUrl,
+  passport.authenticate("local", {
+    failureRedirect: "/register/login",
+    failureFlash: true,
+  }),
+  login
 );
 
 // logout route
-router.get("/logout", (req, res) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    req.flash("success", "Successfully logged out!");
-    res.redirect("/listings");
-  });
-});
+router.get("/logout", logout);
 
 module.exports = router;
