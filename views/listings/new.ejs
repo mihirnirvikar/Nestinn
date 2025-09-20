@@ -3,11 +3,12 @@
     <body>
         <div class="formContainer formContainerNewListing">
             <h3>New Listing Form</h3>
-            <form action="http://localhost:8080/listings" method="POST" class="row-100 needs-validation" novalidate>
+            <form action="http://localhost:8080/listings" method="POST" class="row-100 needs-validation" novalidate
+                enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="validationCustom01" class="form-label">Title</label>
                     <input type="text" class="form-control" id="validationCustom01" name="title"
-                        placeholder="Enter Title" required>
+                        placeholder="Enter Title" value="Sweet Home" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -19,7 +20,7 @@
                 <div class="mb-3">
                     <label for="validationCustom02" class="form-label">Description</label>
                     <textarea type="text" class="form-control" id="validationCustom02" name="description"
-                        placeholder="Enter Description" required></textarea>
+                        placeholder="Enter Description" value="Hello World" required>Sweet Home</textarea>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -28,23 +29,29 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="validationCustom03" class="form-label">Image</label>
-                    <input type="text" class="form-control" id="validationCustom03" name="image"
-                        placeholder="Enter Image URL">
-                    <!-- <div class="valid-feedback">
-                        Looks good!
+                <div class="row g-2">
+                    <div class="mb-3 col-md-7">
+                        <label for="validationCustom03" class="form-label">Upload Image</label>
+                        <input type="file" class="form-control" id="validationCustom03" name="image" accept="image/*" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a valid image.
+                        </div>
                     </div>
-                    <div class="invalid-feedback">
-                        Please provide a valid image address.
-                    </div> -->
+
+                    <div class="mb-3 col-md-5">
+                        <img id="imagePreview" src="" alt="Image Preview" style="max-width: 100px; display: none;" />
+                    </div>
                 </div>
+
 
                 <div class="row  g-2">
                     <div class="mb-3 col-md-5 ">
                         <label for="validationCustom04" class="form-label">Price</label>
                         <input type="Number" class="form-control" id="validationCustom04" placeholder="Enter Price"
-                            name="price" required>
+                            name="price" value="1234" required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -56,7 +63,7 @@
                     <div class="mb-4 col-md-7 ">
                         <label for="validationCustom05" class="form-label">Country</label>
                         <input type="text" class="form-control" id="validationCustom05" name="country"
-                            placeholder="Enter Country Name" required>
+                            placeholder="Enter Country Name" value="Sweet Home" required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -69,7 +76,7 @@
                 <div class="mb-5">
                     <label for="validationCustom06" class="form-label">Location</label>
                     <input type="text" class="form-control" id="validationCustom06" placeholder="Enter Location"
-                        name="location" required>
+                        name="location" value="Sweet Home" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>

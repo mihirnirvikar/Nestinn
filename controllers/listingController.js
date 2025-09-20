@@ -34,9 +34,13 @@ const showListing = wrapAsync(async (req, res, next) => {
 
 // POST ROUTE to store new listing data to DB
 const createListing = wrapAsync(async (req, res, next) => {
+  const url = req.file.path;
+  const { filename } = req.file; 
   const newListing = new Listing(req.body);
   newListing.owner = req.user._id;
-  await newListing.save();
+  newListing.image = { url, filename };
+  const result = await newListing.save();
+  // console.log(result);
   req.flash("success", "Successfully made a new listing!");
   res.redirect(`/listings/${newListing._id}`);
 });
@@ -54,6 +58,10 @@ const editListing = wrapAsync(async (req, res, next) => {
 const updateListing = wrapAsync(async (req, res, next) => {
   const { id } = req.params;
 
+  const url = req.file.path;
+  const { filename } = req.file;
+  req.body.image = { url, filename };
+
   if (req.body.price) {
     req.body.price = Number(req.body.price);
   }
@@ -63,11 +71,12 @@ const updateListing = wrapAsync(async (req, res, next) => {
     runValidators: true,
   });
 
-  console.log(listing);
+  // console.log(listing);
 
   if (!listing) {
     return next(new ExpressError(404, "Listing not found"));
   }
+
   req.flash("success", "Successfully updated listing!");
   res.redirect(`/listings/${listing._id}`);
 });

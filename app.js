@@ -1,12 +1,13 @@
 require('events').EventEmitter.defaultMaxListeners = 50;
+if(process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 const express = require("express");
 const app = express();
-const dotenv = require("dotenv");
-dotenv.config();
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
-const ejaMate = require("ejs-mate");
+const ejsMate = require("ejs-mate");
 const port = 8080;
 const path = require("path");
 const Listing = require("./models/listing.js");
@@ -30,10 +31,10 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.engine("ejs", ejaMate);
+app.engine("ejs", ejsMate);
 
 const sessionOptions = {
-  secret: "mysupersecretcode",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {

@@ -4,7 +4,7 @@
         <div class="formContainer">
             <h3>Edit Route</h3>
             <form action="http://localhost:8080/listings/<%=listing._id%>?_method=PUT" method="POST"
-                class="row-100 needs-validation" novalidate>
+                class="row-100 needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="mb-3">
                     <label for="validationCustom01" class="form-label">Title</label>
                     <input type="text" class="form-control" id="validationCustom01" name="title"
@@ -29,10 +29,16 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="validationCustom03" class="form-label">Image</label>
-                    <input type="text" class="form-control" id="validationCustom03" name="image"
-                        placeholder="Enter Image URL" value="<%=listing.image%>">
+                <div class="mb-3 col-md-7">
+                    <label for="validationCustom03" class="form-label">Upload Image</label>
+                    <input type="file" class="form-control" id="validationCustom03" name="image" accept="image/*"
+                        required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please provide a valid image.
+                    </div>
                 </div>
 
                 <div class="row  g-2">
