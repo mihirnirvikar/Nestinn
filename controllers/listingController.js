@@ -58,9 +58,11 @@ const editListing = wrapAsync(async (req, res, next) => {
 const updateListing = wrapAsync(async (req, res, next) => {
   const { id } = req.params;
 
-  const url = req.file.path;
-  const { filename } = req.file;
-  req.body.image = { url, filename };
+  if(typeof req.file !== "undefined"){
+    const url = req.file.path;
+    const { filename } = req.file;
+    req.body.image = { url, filename };
+  }
 
   if (req.body.price) {
     req.body.price = Number(req.body.price);
