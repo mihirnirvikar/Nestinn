@@ -3,6 +3,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  scroll-behavior: smooth;
 }
 
 .errorContainer {
@@ -94,7 +95,7 @@ body {
 }
 
 .instagram:hover {
-  color: #C13584;
+  color: #c13584;
 }
 
 .linkedin:hover {
@@ -102,16 +103,17 @@ body {
 }
 
 .youtube:hover {
-  color: #FF0000;
+  color: #ff0000;
 }
 
 .listingContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 20px;
   margin-bottom: 40px;
   padding: 0px 80px;
+  
 }
 
 .listingContainer a {
@@ -123,7 +125,7 @@ body {
   width: 180px;
   height: 280px;
   margin: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 
 .listingsDetails {
@@ -232,8 +234,8 @@ body {
   margin-bottom: 16px;
 }
 
-.showDetail{
-    padding: 10px;
+.showDetail {
+  padding: 10px;
 }
 
 .showTitle {
@@ -241,7 +243,10 @@ body {
   font-weight: 600;
 }
 
-.showDescription, .showPrice, .showLocation, .showCountry {
+.showDescription,
+.showPrice,
+.showLocation,
+.showCountry {
   font-size: 15px;
   margin-bottom: 8px;
 }
@@ -251,7 +256,6 @@ body {
 }
 
 .editBtn {
-  
   background-color: #f43f5e;
   color: white;
   padding: 12px 20px;
@@ -284,7 +288,165 @@ body {
   transition: 0.3s ease-in-out;
 }
 
-.showEditDeleteBtn{
+.showEditDeleteBtn {
   display: flex;
   gap: 20px;
+}
+
+#map {
+  height: 400px;
+  width: 97%;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.leaflet-control-layers {
+  background: white;
+  border-radius: 8px;
+  padding: 6px 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* Labels */
+.leaflet-control-layers label {
+  display: block;
+  padding: 4px 6px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+/* Hover effect */
+.leaflet-control-layers label:hover {
+  background: #f0f0f0;
+}
+
+/* Radio/checkbox inputs */
+.leaflet-control-layers input {
+  margin-right: 6px;
+  accent-color: #0078ff; /* modern browsers */
+}
+
+/* Control toggle button (the little icon) */
+.leaflet-control-layers-toggle {
+  width: 28px;
+  height: 28px;
+  background: url("https://cdn-icons-png.flaticon.com/512/1828/1828778.png")
+    no-repeat center/18px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.listingsHeader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filters{
+  margin: 20px 20px 0 20px;
+  text-align: center;
+  line-height: 24px;
+  color: #333;
+}
+
+.filters i{
+  font-size: 20px;
+}
+
+.filters:hover{
+  cursor: pointer;
+  color: #000;
+}
+
+.filters p{
+  font-size: 12px;
+}
+
+.taxes{
+  height: 64px;
+  width: 200px;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 0 40px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.taxes p{
+  margin-top: 12px;
+}
+
+.gstTag{
+  display: none;
+}
+
+.active{
+  display: inline;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 54px;
+  height: 28px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  right: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #000;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

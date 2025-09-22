@@ -2,7 +2,7 @@
 
     <body>
         <div class="formContainer formContainerNewListing">
-            <h3>New Listing Form</h3>
+            <h3 class="mt-3">New Listing Form</h3>
             <form action="http://localhost:8080/listings" method="POST" class="row-100 needs-validation" novalidate
                 enctype="multipart/form-data">
                 <div class="mb-3">
@@ -29,20 +29,16 @@
                     </div>
                 </div>
 
-                <div class="row g-2">
-                    <div class="mb-3 col-md-7">
-                        <label for="validationCustom03" class="form-label">Upload Image</label>
-                        <input type="file" class="form-control" id="validationCustom03" name="image" accept="image/*" required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please provide a valid image.
-                        </div>
-                    </div>
 
-                    <div class="mb-3 col-md-5">
-                        <img id="imagePreview" src="" alt="Image Preview" style="max-width: 100px; display: none;" />
+                <div class="mb-3">
+                    <label for="validationCustom03" class="form-label">Upload Image</label>
+                    <input type="file" class="form-control" id="validationCustom03" name="image" accept="image/*"
+                        required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please provide a valid image.
                     </div>
                 </div>
 

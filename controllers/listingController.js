@@ -2,6 +2,7 @@ const wrapAsync = require("../utils/wrapAsync");
 const Listing = require("../models/listing.js");
 const mongoose = require("mongoose");
 
+
 // SHOW ALL LISTINGs ROUTE to show all listings
 const showAllListings = wrapAsync(async (req, res, next) => {
   const allListings = await Listing.find({});

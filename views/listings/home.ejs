@@ -3,11 +3,60 @@
     <% if(success && success.length) { %>
         <div class="alert alert-success alert-dismissible fade show mt-3 col-md-6 offset-md-3" role="alert">
             <%= success %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <% } %>
 
             <body>
+
+                <div class="listingsHeader ">
+
+                    <div class="filters first">
+                        <i class="fa-solid fa-bed"></i>
+                        <p>Hotels</p>
+                    </div>
+                    <div class="filters">
+                        <i class="fa-solid fa-bell-concierge"></i>
+                        <p>Villas</p>
+                    </div>
+                    <div class="filters">
+                        <i class="fa-solid fa-cow"></i>
+                        <p>Farms</p>
+                    </div>
+                    <div class="filters">
+                        <i class="fa-solid fa-mountain-city"></i>
+                        <p>Mountains</p>
+                    </div>
+                    <div class="filters">
+                        <i class="fa-solid fa-water"></i>
+                        <p>Beach</p>
+                    </div>
+                    <div class="filters">
+                        <i class="fa-solid fa-bed"></i>
+                        <p>Desert</p>
+                    </div>
+                    <div class="filters">
+                        <i class="fa-solid fa-snowflake"></i>
+                        <p>Snow</p>
+                    </div>
+                    <div class="filters">
+                        <i class="fa-solid fa-umbrella-beach"></i>
+                        <p>Island</p>
+                    </div>
+                    <div class="filters">
+                        <i class="fa-solid fa-tree"></i>
+                        <p>Forest</p>
+                    </div>
+
+                    <div class="taxes">
+                        <p>After Taxes</p>
+                        <label class="switch">
+                            <input type="checkbox" id="taxSwitch" class="taxSwitch">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+
                 <div class="listingContainer">
                     <% listings.forEach(listing=> { %>
                         <a href="http://localhost:8080/listings/<%=listing._id%>">
@@ -26,7 +75,8 @@
                                         </span>
                                         <br>
                                         <span class="listingPrice">
-                                            &#x20B9 <%= Number(listing.price).toLocaleString('en-IN') %> for 2 nights
+                                            &#x20B9 <%= Number(listing.price).toLocaleString('en-IN') %> for 2 nights <i
+                                                    class="gstTag">&nbsp;&nbsp;&nbsp;+18% GST</i>
                                         </span>
 
 
@@ -40,6 +90,20 @@
                         <% }) %>
                 </div>
 
-            </body>
+                <script>
+                    const taxBtn = document.querySelector('.taxSwitch'); 
+                    
+                    taxBtn.addEventListener('click', () => {
+                        const gstTag = document.querySelectorAll('.gstTag'); 
+                        gstTag.forEach(tag => {
+                            if(tag.classList.contains('active')){
+                                tag.classList.remove('active');
+                            }else{
+                                tag.classList.add('active');
+                            }
+                        })
+                    })
+                    
+                </script>
 
-            </html>
+            </body>

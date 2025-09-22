@@ -5,6 +5,8 @@ const multer = require("multer");
 const { storage } = require("../cloudConfig");
 const upload = multer({ storage });
 
+
+
 const { validateListing, isLoggedIn, isOwner } = require("../middleware.js");
 const {
   showAllListings,
