@@ -80,9 +80,9 @@ main()
 
 
 
-// app.get("/", (req, res) => {
-//   res.send("Hello from NestInn");
-// });
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
 
 // app.get('/testListing', async(req, res) => {
 //     const sampleListing = new Listing({
