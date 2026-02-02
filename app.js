@@ -67,7 +67,7 @@ app.use("/register", userRouter);
 
 
 async function main() {
-  await mongoose.connect(process.env.MONGO_URL);
+  await mongoose.connect(process.env.MONGODB_ATLAS_URL);
 }
 
 main()
@@ -100,14 +100,6 @@ main()
 //       console.log(err);
 //     })
 // });
-
-
-
-
-
-
-
-
 
 
 // For all other routes
