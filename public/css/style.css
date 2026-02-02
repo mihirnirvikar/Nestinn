@@ -91,11 +91,11 @@ body {
 }
 
 .twitter:hover {
-  color: #00acee;
+  color: #1b1b1b;
 }
 
 .instagram:hover {
-  color: #c13584;
+  color: #c32aa3;
 }
 
 .linkedin:hover {
@@ -154,7 +154,7 @@ body {
 
 .formContainer {
   width: 100%;
-  max-height: 600px;
+  min-height: 600px;
   display: flex;
   justify-content: center;
   align-items: center;

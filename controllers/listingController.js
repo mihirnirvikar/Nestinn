@@ -38,6 +38,7 @@ const createListing = wrapAsync(async (req, res, next) => {
   const url = req.file.path;
   const { filename } = req.file; 
   const newListing = new Listing(req.body);
+  // console.log(req.user)
   newListing.owner = req.user._id;
   newListing.image = { url, filename };
   const result = await newListing.save();

@@ -48,11 +48,11 @@
                             <%if(currUser && currUser._id.equals(listing.owner._id)) {%>
                                 <div class="showEditDeleteBtn">
                                     <a class="editBtn"
-                                        href="http://localhost:8080/listings/<%= listing._id %>/edit">Edit this
+                                        href="/listings/<%= listing._id %>/edit">Edit this
                                         Listing</a>
                                     <br><br>
                                     <form method="POST"
-                                        action="http://localhost:8080/listings/<%= listing._id %>?_method=DELETE">
+                                        action="/listings/<%= listing._id %>?_method=DELETE">
                                         <button class="deleteBtn" type="submit">Delete this Listing</button>
                                     </form>
                                 </div>

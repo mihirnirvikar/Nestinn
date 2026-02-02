@@ -8,7 +8,6 @@ const app = express();
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
-const port = 8080;
 const path = require("path");
 const Listing = require("./models/listing.js");
 const wrapAsync = require("./utils/wrapAsync");
@@ -122,6 +121,6 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error.ejs", { message });
 });
 
-app.listen(port, () => {
-  console.log(`Server is listening at http://localhost:${port || 8080}/listings`);
+app.listen(process.env.PORT || 8080, () => {
+  console.log(`Server is listening at http://localhost:${process.env.PORT || 8080}/listings`);
 });
